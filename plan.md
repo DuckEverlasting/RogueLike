@@ -1,29 +1,46 @@
 class Floor:
   - level *
+  - type
+
+class Room:
+  - id *
+  - floor *
+  - name
+  - desc
+  - type
+  - visited
 
 class Tile:
   - floor *
+  - room *
   - coord *
+  - sprite
   - occupant
   - terrain
-  - explored
+  - visited
   - items
 
 class Object:
   - id *
+  - type
+  - sprite
+  - passable
+  - approachBehavior()
 
 class Mob:
   - id *
-  - attitude
-  - behavior
+  - type
+  - sprite
   - hp
   - ac
   - speed
   - xp
+  - attitude
   - drops
+  - mobBehavior()
 
-
-class Player:
+class Player(Singleton):
+  - sprite
   - class
   - race
   - str
@@ -37,17 +54,31 @@ class Player:
   - mp
   - status
   - loc
+  - head
   - body
+  - legs
   - mainHand
   - offHand
-  - necklace
-  - ringA
-  - ringB
+  - neck
+  - fingerA
+  - fingerB
   - inv
   - spells
+  - move()
+  - equip()
+  - unequip()
+  - use()
+  - cast()
+  - attack()
+  - throw()
+  - look()
+  - get()
+  - drop()
+  - wait()
 
 class Item:
   - id *
+  - sprite
   - autoPickup
   - weight
 
@@ -55,14 +86,17 @@ class Item:
     - amount
 
   subclass Consumable:
-    - onUse
+    - type
+    - onUse()
 
   subclass Missile:
     - amount
     - weaponType
     - weaponRequired
+    - damage
 
   subclass Wearable:
+    - type
     - cursed
     - armor
     - effects
@@ -71,3 +105,4 @@ class Item:
       - twoHanded
       - offHand
       - ranged
+      - damage
